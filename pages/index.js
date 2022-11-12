@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useRouter } from 'next/router'
+
 
 export default function Home() {
+  const router = useRouter()
+  const { locale } = router
+  // console.log("LOcal", router)
   return (
     <div className={styles.container}>
       <Head>
@@ -12,6 +17,8 @@ export default function Home() {
       </Head>
 
       <h1>Home</h1>
+      <hr />
+      <h1>{locale}</h1>
     </div>
   )
 }
