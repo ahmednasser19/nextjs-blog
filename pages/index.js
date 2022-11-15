@@ -1,13 +1,89 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
+import { useState } from 'react';
 
 
 export default function Home() {
   const router = useRouter()
   const { locale } = router
   // console.log("LOcal", router)
+  const [style1, setStyle1] = useState({})
+  const [image1, setImage1] = useState('/1.png')
+  const [image2, setImage2] = useState('/mini2.png')
+  const [image3, setImage3] = useState('/mini3.png')
+
+
+  const handleCLick1 = () => {
+    if (image1 === '/1.png') {
+      console.log("111111")
+    } else if (image2 === "/2.png") {
+      console.log("222222")
+    } else {
+      console.log("333333")
+    }
+    // setImage1('/2.png')
+
+  }
+
+  const handleCLick2 = () => {
+    if (image2 === '/mini2.png' && image3 !== '/mini1.png') {
+      setImage1('/2.png')
+      setImage2('/mini1.png')
+      setStyle1({ width: "200px", transition: " width 2s, height 4s; " })
+    }
+    // else if (image2 === '/mini1.png' && image3 === '/mini2.png') {
+    //   setImage1('/1.png')
+    //   setImage2('/mini3.png')
+    // } else if (image2 === '/mini1.png' && image3 === '/mini1.png') {
+    //   setImage1('/2.png')
+    //   setImage2('/mini3.png')
+    // }
+    else if (image2 === '/mini1.png' && image1 === '/2.png') {
+      setImage1('/1.png')
+      setImage2('/mini2.png')
+    }
+
+  }
+
+  const handleCLick3 = () => {
+    if (image3 === '/mini3.png' && image2 === '/mini2.png') {
+      setImage1('/3.png')
+      // setImage2('/mini1.png')
+      setImage3('/mini1.png')
+    }
+    // else if ((image3 === '/mini2.png') && (image2 === '/mini1.png')) {
+    //   setImage1('/2.png')
+    //   setImage2('/mini3.png')
+    //   setImage3('/mini1.png')
+    // } else if ((image3 === '/mini1.png') && (image2 === '/mini3.png')) {
+    //   setImage1('/1.png')
+    //   setImage2('/mini2.png')
+    //   setImage3('/mini3.png')
+    // }
+    // else if ((image3 === '/mini1.png') && (image2 === '/mini2.png')) {
+    //   setImage1('/1.png')
+    //   setImage2('/mini1.png')
+    //   setImage3('/mini2.png')
+    // }
+    else if (image2 === '/mini1.png') {
+
+    }
+
+    else {
+      setImage1('/1.png')
+      // setImage2('/mini1.png')
+      setImage3('/mini3.png')
+    }
+
+  }
+
+
+
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,7 +94,20 @@ export default function Home() {
 
       <h1>Home</h1>
       <hr />
-      <h1>{locale}</h1>
+
+
+
+      <div style={{ display: "flex" }}>
+        <div style={{ width: "40%" }}>
+          <Image style={style1} onClick={() => handleCLick1()} id='image1' src={image1} width={500} height={500} alt="" />
+        </div>
+
+        <div style={{ width: "30%", display: "flex", "flexShrink": "flexShrink" }}>
+          <Image style={{ width: "200px" }} id='image2' onClick={() => handleCLick2()} src={image2} width={500} height={500} alt="" />
+          <Image style={{ width: "200px" }} id="image3" onClick={() => handleCLick3()} src={image3} width={500} height={500} alt="" />
+        </div>
+
+      </div>
     </div>
   )
 }
